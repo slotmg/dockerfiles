@@ -8,7 +8,8 @@ ENV LC_ALL pt_BR
 RUN echo "deb http://archive.debian.org/debian/ squeeze main contrib non-free" > /etc/apt/sources.list        && \
     echo "deb http://snapshot.debian.org/archive/debian/20070612T000000Z lenny main" >> /etc/apt/sources.list && \
     echo "locales locales/locales_to_be_generated multiselect pt_BR ISO-8859-1" | debconf-set-selections      && \
-    echo "locales locales/default_environment_locale select pt_BR" | debconf-set-selections
+    echo "locales locales/default_environment_locale select pt_BR" | debconf-set-selections                   && \
+    dpkg-reconfigure locales
 
 RUN apt-get update                                     && \
     apt-get -y --no-install-recommends install locales && \
