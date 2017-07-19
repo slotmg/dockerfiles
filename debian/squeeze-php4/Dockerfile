@@ -15,6 +15,8 @@ RUN apt-get update                                     && \
     apt-get -y --no-install-recommends install locales && \
     apt-get -y --no-install-recommends --force-yes install apache2 libapache2-mod-php4 php4 php4-auth-pam php4-cli php4-common php4-curl php4-domxml php4-gd php4-imagick php4-json php4-librdf php4-mcal php4-mcrypt php4-mhash php4-pear php4-pgsql php4-ps php4-pspell php4-recode php4-uuid 
 
+COPY envvars /etc/apache2/envvars
+COPY httpd.conf /etc/apache2/httpd.conf
 COPY run.sh /run.sh
 COPY zend.tar.xz /zend.tar.xz
 COPY default /etc/apache2/sites-available/default  
