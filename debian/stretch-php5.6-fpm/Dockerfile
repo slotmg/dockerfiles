@@ -4,16 +4,18 @@ MAINTAINER Gustavo Soares <gustavo@ontic.com.br>
 
 ENV DEBIAN_FRONTEND noninteractive
 
-RUN apt update
+RUN echo "deb http://httpredir.debian.org/debian jessie main contrib non-free" >> /etc/apt/sources.list
 
-RUN echo "locales locales/locales_to_be_generated multiselect pt_BR.UTF-8 UTF-8" | debconf-set-selections &&\
-    echo "locales locales/default_environment_locale select pt_BR.UTF-8" | debconf-set-selections
-RUN apt install --no-install-recommends locales -y 
+COPY jessie /etc/apt/preferences.d/
 
-ENV LC_ALL pt_BR.UTF-8
+COPY run.sh /run.sh
+
+RUN apt-get update && \
+    apt-get install lsof apt-utils -y && \
+    apt-get install -t jessie php5-fpm php5-gd php5-json php5-mcrypt php5-mysql php5-readline php5-xmlrpc php5-cli -y
 
 RUN apt-get clean && \
     apt-get autoremove --purge -y && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-CMD ["/bin/bash"]
+CMD ["/run.sh"] 
