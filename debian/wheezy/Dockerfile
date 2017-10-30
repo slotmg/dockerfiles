@@ -9,7 +9,7 @@ RUN apt-get update
 
 RUN echo "locales locales/locales_to_be_generated multiselect pt_BR ISO-8859-1" | debconf-set-selections &&\
     echo "locales locales/default_environment_locale select pt_BR" | debconf-set-selections
-RUN apt-get -y install --no-install-recommends locales 
+RUN apt-get -y install --no-install-recommends locales apt-utils
 
 ENV LC_ALL pt_BR
 
