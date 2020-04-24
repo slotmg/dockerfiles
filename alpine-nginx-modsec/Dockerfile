@@ -44,7 +44,6 @@ COPY --from=build_modsecurity /usr/local/modsecurity /usr/local/modsecurity
 COPY --from=build_modsecurity /usr/local/owasp-modsecurity-crs /usr/local/owasp-modsecurity-crs
 COPY --from=build_modsecurity /usr/lib/nginx/modules/ /usr/lib/nginx/modules/
 
-COPY errors /usr/share/nginx/errors
 COPY conf/nginx/ /etc/nginx/
 COPY conf/modsec/ /etc/nginx/modsec/
 COPY conf/owasp/ /usr/local/owasp-modsecurity-crs/
